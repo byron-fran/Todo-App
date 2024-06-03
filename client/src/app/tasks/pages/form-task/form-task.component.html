@@ -1,0 +1,28 @@
+<div class="task-container__form">
+    <form class="task-form"  (ngSubmit)="onSubmit()" action="" [formGroup]="form">
+        <div class="task-field">
+            <label class="task-label" for="title">Title</label>
+            <input class="task-input"  
+            type="text" placeholder="title"
+            formControlName="title"
+            >
+        </div>
+        <div class="task-field">
+            <label class="task-label" for="description">Description</label>
+            <textarea 
+                class="task-textarea" 
+                name="description" 
+                id="description" cols="30" rows="10"
+                formControlName="description"
+                ></textarea>
+        </div>
+        <button type="submit" class="btn-submit" >
+            @if(id){
+                Update
+            }
+            @else { 
+                Add task
+            }
+        </button>
+    </form>
+</div>

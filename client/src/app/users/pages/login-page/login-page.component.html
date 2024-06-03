@@ -1,0 +1,24 @@
+<div class="auth-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" action="" method="post">
+        <p class="auth-error">{{ errorMessage()}} </p>
+  
+        <div class="auth-field">
+            <label class="auth-label" for="email">Email</label>
+            <input 
+                formControlName="email" 
+                class="auth-input" id="email" name="email" type="text" placeholder="name">
+        </div>
+        <div class="auth-field">
+            <label class="auth-label" for="password">Password</label>
+            <input 
+                formControlName="password" autocomplete="on" class="auth-input" name="password" id="password" type="password"
+                placeholder="your password">
+        </div>
+        <button class="btn-submit" type="submit">Login</button>
+        <div class="auth-links">
+            <a href="#">Forgot your password</a>
+            <a routerLink="/auth/register">Create an account</a>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,8 @@
+<div>
+    <navbar/>
+    <div class="task__list-container">
+        @for (task of tasks; track $index) {
+       <task-card [task]="task"/>
+        }
+    </div>
+</div>

@@ -1,0 +1,60 @@
+@import '../../../../scss/colors';
+@import '../../../../scss/mixins';
+
+.task-container__form {
+
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.task-input{
+    
+    border: $gray 1px solid;
+    padding: 0.4rem;
+
+    &:focus{
+        outline: none;
+    }
+
+}
+.task-label{
+    margin-block: 0.5rem;
+}
+.task-field {
+
+    display: flex;
+    flex-direction: column;
+    
+}
+.task-form {
+    border-radius: 5px;
+    padding: 1rem;
+    border: $gray 1px solid;
+    width: 100%;
+
+    @include tablet {
+        width: 40%;
+    }
+    @include desktop {
+        width: 50%;
+    }
+    @include large_desktop {
+        width: 30%;
+    };
+    
+}
+.task-textarea {
+
+    resize: none;
+    border: $gray 1px solid;
+    padding: 0.4rem;
+
+    &:focus{
+        outline: none;
+    }
+}

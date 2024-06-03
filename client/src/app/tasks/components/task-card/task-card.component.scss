@@ -1,0 +1,47 @@
+@import '../../../../scss/colors';
+
+button, a {
+    border: none;
+    background: lighten($color: $gray, $amount: 8); 
+    padding: 0;
+}
+.task-card {
+    background: lighten($color: $gray, $amount: 8);
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
+    }
+    .task-options {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        h2 {
+            font-size: 17px;
+            font-weight: bold;
+        }
+    
+    }
+    
+    .task-icons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    
+        svg {
+            width: 17px;
+            height: 17px;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
+}
