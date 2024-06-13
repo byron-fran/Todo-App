@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class UsersService {
   
   constructor(private http: HttpClient) {
-    
+
     const token = localStorage.getItem('token')
     if (token) {
       this.checkAuth().subscribe()
@@ -70,7 +70,7 @@ export class UsersService {
         }),
 
         catchError((error: HttpErrorResponse) => {
-
+          console.log(error.error)
           this._errorRegister.set(Object.values(error.error))
           return of(false)
 

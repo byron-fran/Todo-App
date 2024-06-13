@@ -1,5 +1,6 @@
 <ul>
-    @for (item of listMenuLinks; track $index) {
+    @for (item of listMenuLinks; track $index) { 
+        
         <li routerLinkActive="active"  [routerLink]="item.url">{{item.title}}</li>
     }
 </ul>

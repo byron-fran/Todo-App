@@ -4,12 +4,12 @@
 .sidebar {
     width: 100%;
     display: grid;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 
     @include tablet {
         grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
+        
     }
 
     div {

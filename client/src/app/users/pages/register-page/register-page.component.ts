@@ -34,6 +34,7 @@ export class RegisterPageComponent {
 
 
   public onSubmit() {
+    console.log(this.form.value)
     if(this.form.invalid){
       return
     }
@@ -41,6 +42,9 @@ export class RegisterPageComponent {
       .subscribe({
         next : () => {
           this._errorMessages.set(this.userServices.errorRegister())
+        },
+        error  : (error) => {
+          console.log(error)
         }
       })
 

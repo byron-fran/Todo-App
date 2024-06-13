@@ -1,0 +1,18 @@
+@import '../../../../scss/colors';
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin : 1rem auto;
+
+}
+ul {
+    .logout {
+        display: flex;
+        align-items: center;
+        button {
+            color: $red;
+        }
+    }
+}
