@@ -5,29 +5,44 @@ import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } 
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from '../../users.service';
-
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button'
+import {MatIconModule} from '@angular/material/icon';
 @Component({
   selector: 'auth-login-page',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './login-page.component.html',
 
 })
 export class LoginPageComponent implements OnInit {
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   constructor(
     private fb: FormBuilder,
     private userServices: UsersService,
     private router: Router
-  ) {
-    
-     
-   }  
+  ) {};
 
-  private _errorMessage  = signal<string>('')
+  public hide = signal(true);
+
+  public clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide);
+    event.stopPropagation();
+
+  }
+  private _errorMessage = signal<string>('')
   public errorMessage = computed(() => this._errorMessage())
   public form: FormGroup = this.fb.group({
 
@@ -38,16 +53,16 @@ export class LoginPageComponent implements OnInit {
   });
 
   public onSubmit() {
-    if(this.form.invalid){
+    if (this.form.invalid) {
 
       return
     };
 
     const { email, password } = this.form.value
-    
+
     return this.userServices.login(email, password)
       .subscribe({
-        next : () => {this._errorMessage.set(this.userServices.errorLogin())}
+        next: () => { this._errorMessage.set(this.userServices.errorLogin()) }
       })
   }
 }

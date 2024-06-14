@@ -4,12 +4,23 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { UsersService } from '../../users.service';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button'
+import {MatIconModule} from '@angular/material/icon';
 @Component({
   selector: 'app-register-page',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './register-page.component.html',
 
 })
@@ -18,10 +29,17 @@ export class RegisterPageComponent {
   constructor(
     private fb: FormBuilder,
     private userServices: UsersService,
-    private router : Router
+    private router: Router
   ) { };
-  
-  private _errorMessages  = signal<string[]>([])
+  public hide = signal(true);
+
+  public clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide);
+    event.stopPropagation();
+
+  }
+
+  private _errorMessages = signal<string[]>([])
   public errorMessages = computed(() => this._errorMessages());
 
   public form: FormGroup = this.fb.group({
@@ -35,15 +53,15 @@ export class RegisterPageComponent {
 
   public onSubmit() {
     console.log(this.form.value)
-    if(this.form.invalid){
+    if (this.form.invalid) {
       return
     }
     this.userServices.register(this.form.value)
       .subscribe({
-        next : () => {
+        next: () => {
           this._errorMessages.set(this.userServices.errorRegister())
         },
-        error  : (error) => {
+        error: (error) => {
           console.log(error)
         }
       })

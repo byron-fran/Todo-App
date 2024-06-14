@@ -1,20 +1,25 @@
 <div class="auth-container">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" action="" method="post">
         <p class="auth-error">{{ errorMessage()}} </p>
-  
-        <div class="auth-field">
-            <label class="auth-label" for="email">Email</label>
-            <input 
-                formControlName="email" 
-                class="auth-input" id="email" name="email" type="text" placeholder="name">
-        </div>
-        <div class="auth-field">
-            <label class="auth-label" for="password">Password</label>
-            <input 
-                formControlName="password" autocomplete="on" class="auth-input" name="password" id="password" type="password"
-                placeholder="your password">
-        </div>
-        <button class="btn-submit" type="submit">Login</button>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput id="email" name="email" type="text" placeholder="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input formControlName="password" name="password" id="password" matInput
+                [type]="hide() ? 'password' : 'text'" />
+
+            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()">
+                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+
+        </mat-form-field>
+
+        <button type="submit" class="btn-submit">Login</button>
         <div class="auth-links">
             <a href="#">Forgot your password</a>
             <a routerLink="/auth/register">Create an account</a>

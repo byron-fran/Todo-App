@@ -4,18 +4,19 @@
 ul {
 
     margin: 2rem auto 0 auto;
-    display: contents;
+    display: flex;
     column-gap: 2rem;
     row-gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: row;
     width: 100%;
     box-sizing: border-box;
     margin-top: 1rem;
 
     @include tablet {
-
+        display: contents;
         flex-direction: column;
+        flex-wrap: wrap;
 
     }
 
@@ -24,10 +25,12 @@ ul {
         width: 100%;
         display: block;
         margin-block: 0.5rem;
+
         &:hover {
             cursor: pointer;
         }
-        &:first-child{
+
+        &:first-child {
             margin-top: 0;
         }
 

@@ -1,16 +1,38 @@
 @import '../../../../scss/colors';
-
+@import '../../../../scss/mixins';
 .navbar-container {
     display: flex;
     justify-content: space-between;
     width: 90%;
-    margin : 1rem auto;
+    margin: 1rem auto;
+    
+
 
 }
+
+.searchbar {
+    input[type="text"] {
+        border: none;
+        background: lighten($color: $gray, $amount: 8);
+        padding: 10px;
+        border-radius: 5px;
+        display: block;
+        @include tablet {
+            width: 300px;
+        }
+        &:focus {
+            outline: none;
+
+        }
+    }
+
+}
+
 ul {
     .logout {
         display: flex;
         align-items: center;
+
         button {
             color: $red;
         }
