@@ -100,4 +100,25 @@ def change_status_favorite(request, id : str):
         task.is_favorite = True
         task.save()
         return Response({'message': 'Added to favorites'}, status=status.HTTP_200_OK)
-   
+  
+@permission_classes(IsAuthenticated)
+@authentication_classes(TokenAuthentication)
+@api_view(['PUT'])
+def change_status_done(request, id : str):
+    try:
+         task = Task.objects.get(id=id)
+    except Task.DoesNotExist:
+         return Response({'message': 'Task not found'}, status=status.HTTP_404_NOT_FOUND)
+    except ValidationError:
+         return Response({'message': 'Invalid ID format'}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+         return Response({'message': f'An unexpected error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+     
+    if task.done:
+        task.done = False
+        task.save()
+        return Response({'message': 'Task pending'}, status=status.HTTP_200_OK)
+    else:
+        task.done = True
+        task.save()
+        return Response({'message': 'Task done'}, status=status.HTTP_200_OK)
