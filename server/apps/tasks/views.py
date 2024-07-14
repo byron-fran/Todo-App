@@ -1,3 +1,4 @@
+from django.forms import ValidationError
 from django.shortcuts import render
 from .serealizers import TaskSerealizer
 from rest_framework import viewsets
@@ -8,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import Task
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import permission_classes,authentication_classes,api_view
 
 # Create your views here.
 class Tasks(APIView):
@@ -75,3 +77,27 @@ class TaskDetail(APIView):
 
         except:
             return Response({'message': 'Task not found'}, status=status.HTTP_404_NOT_FOUND)
+
+ # 
+@permission_classes(IsAuthenticated)
+@authentication_classes(TokenAuthentication)
+@api_view(['PUT'])
+def change_status_favorite(request, id : str):
+    try:
+         task = Task.objects.get(id=id)
+    except Task.DoesNotExist:
+         return Response({'message': 'Task not found'}, status=status.HTTP_404_NOT_FOUND)
+    except ValidationError:
+         return Response({'message': 'Invalid ID format'}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+         return Response({'message': f'An unexpected error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    if task.is_favorite:
+        task.is_favorite = False
+        task.save()
+        return Response({'message': 'It was removed from favorites'}, status=status.HTTP_200_OK)
+    else:
+        task.is_favorite = True
+        task.save()
+        return Response({'message': 'Added to favorites'}, status=status.HTTP_200_OK)
+   
