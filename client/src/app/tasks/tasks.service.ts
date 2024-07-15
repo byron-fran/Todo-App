@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, OnInit, computed, signal } from '@angular/core';
-import { Task } from './interfaces/Task';
+import { Injectable} from '@angular/core';
+import { Task, TaskForm } from './interfaces/Task';
 import { BehaviorSubject, Observable, catchError, map, of, tap, } from 'rxjs';
 
 @Injectable({
@@ -11,12 +11,7 @@ export class TasksService {
   constructor(private http: HttpClient) {
 
     this.listTasks()
-
-      .subscribe(res => {
-
-        this._tasks.next([...res])
-
-      })
+      .subscribe(res => this._tasks.next([...res]))
   };
 
   private _tasks = new BehaviorSubject<Task[]>([]);
@@ -69,7 +64,7 @@ export class TasksService {
 
   };
 
-  public updateTaskById(id: string, task: Task): Observable<Task | string> {
+  public updateTaskById(id: string, task: TaskForm): Observable<Task | string> {
 
     return this.http.put<Task>(`/tasks/${id}/`, task)
       .pipe(
@@ -81,5 +76,45 @@ export class TasksService {
       )
   }
 
+  public handleFavorite(id: string): Observable<string> {
+
+    return this.http.put<string>(`/favorites/${id}/`, {})
+      .pipe(
+        tap(message => {
+
+          const taskfind = this._tasks.getValue().find(task => task.id === id)
+
+          if (taskfind) {
+            const tasksUpdate = this._tasks.getValue().map(task => {
+
+              if (taskfind.id === task.id) return { ...task, is_favorite: !task.is_favorite }
+              return task
+
+            });
+            this._tasks.next(tasksUpdate)
+          }
+        })
+      )
+  };
+
+  public handleDone(id: string): Observable<string> {
+
+    return this.http.put<string>(`/done/${id}/`, {})
+      .pipe(
+        tap(message => {
+          const taskfind = this._tasks.getValue().find(task => task.id === id)
+
+          if (taskfind) {
+            const tasksUpdate = this._tasks.getValue().map(task => {
+
+              if (taskfind.id === task.id) return { ...task, done: !task.done }
+              return task
+
+            });
+            this._tasks.next(tasksUpdate)
+          }
+        })
+      )
+  };
 
 }
