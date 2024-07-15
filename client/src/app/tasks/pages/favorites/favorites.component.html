@@ -1,1 +1,11 @@
-<p>favorites works!</p>
+<div>
+  
+    <div class="task__list-container">
+        @if(favorites.length){
+            @for (task of favorites; track $index) {
+           <task-card [task]="task"/>
+            }
+        }
+        @else {<p>No favorites</p>}
+    </div>
+</div>

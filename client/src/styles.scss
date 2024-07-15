@@ -117,5 +117,22 @@ h1, h2, h3, p {
         cursor: pointer;
     }
 }
+
+.task__list-container {
+
+    display: grid;
+    margin: 2rem auto;
+    gap: 1rem;
+
+    @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+        width: 95%;
+
+    }
+
+ 
+
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

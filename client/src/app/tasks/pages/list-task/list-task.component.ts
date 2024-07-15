@@ -10,7 +10,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
   standalone: true,
   imports: [TaskCardComponent, NavbarComponent],
   templateUrl: './list-task.component.html',
-  styleUrl: './list-task.component.scss'
+
 })
 export class ListTaskComponent implements OnInit, OnDestroy {
 
