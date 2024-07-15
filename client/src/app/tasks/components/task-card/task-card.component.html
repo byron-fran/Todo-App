@@ -1,29 +1,36 @@
 <div class="task-card">
     <div class="task-options">
-        <h2>{{task.title}}</h2>
-        <div class="task-icons">
+        <p>{{task.title}}</p>
+        <div class="icons_options">
+            <div class="icons_options">
+                <button (click)="onClickDone(task.id)" mat-menu-item >
+                    <mat-icon>
+                        @if (task.done) {<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1072ce"><path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>}
+                        @else {<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1072ce"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>}
+                    </mat-icon>
+                </button>
+                <button (click)="onClickFavorite(task.id)" mat-menu-item>
+                    @if(task.is_favorite){<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1072ce"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg>}
+                    @else{<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1072ce"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>}
+                </button>
+            </div>
 
-            <button mat-button [matMenuTriggerFor]="menu"> <mat-icon color="tertiary">more_vert</mat-icon> </button>
-            <mat-menu #menu="matMenu" class="menu-icons">
-                <!-- Menu items -->
-                <button mat-menu-item class="m-icons">
-                    <mat-icon>check_circle</mat-icon>
-                    <p>Done</p>
-                </button>
-                <button mat-menu-item>
-                    <mat-icon color="#1072ce">favorite</mat-icon>
-                    <p>Favorite</p>
-                </button>
-                <a mat-menu-item [routerLink]="['/tasks/update', task.id]">
-                    <mat-icon>edit_document</mat-icon>
-                    <p>Update</p>
-                </a>
-                <button mat-menu-item (click)="onDelete(task.id)">
-                    <mat-icon>delete</mat-icon>
-                    <p>Delete</p>
-                </button>
-            </mat-menu>
+            <div>
+                <button mat-button [matMenuTriggerFor]="menu"> <mat-icon style="color: #1072ce;" >more_vert</mat-icon> </button>
+                <mat-menu #menu="matMenu">
+                    <!-- Menu items -->
+                    <a class="icon_update" [routerLink]="['/tasks/update', task.id]">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1072ce"><path d="M360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm424-368 57-56-56-56-57 56 56 56ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357L280-563v283h282l278-278v358q0 33-23.5 56.5T760-120H200Z"/></svg>
+                        <p>Update</p>
+                    </a>
+                    <button class="icon_delete" (click)="onDelete(task.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#c70e0e"><path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Z"/></svg>
+                        <p>Delete</p>
+                    </button>
+                </mat-menu>
+            </div>
         </div>
+
     </div>
     <p>{{task.description}}</p>
 

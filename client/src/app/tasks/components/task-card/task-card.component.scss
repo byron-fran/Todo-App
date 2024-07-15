@@ -1,10 +1,16 @@
 @import '../../../../scss/colors';
 
-button, a {
+p {
+    margin: 0;
+}
+
+button,
+a {
     border: none;
-    background: lighten($color: $gray, $amount: 8); 
+    background: lighten($color: $gray, $amount: 8);
     padding: 0;
 }
+
 .task-card {
     background: lighten($color: $gray, $amount: 8);
     padding: 1rem;
@@ -17,31 +23,51 @@ button, a {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 5;
+        line-clamp: 5;
         overflow: hidden;
     }
+
     .task-options {
         position: relative;
         display: flex;
         justify-content: space-between;
-        h2 {
-            font-size: 17px;
+        align-items: flex-start;
+        .icons_options {
+            display: flex;
+            align-items: center;
+        }
+        .mat-mdc-menu-item {
+            padding: 0;
+        }
+
+        p {
+            font-size: 14px;
             font-weight: bold;
         }
-    
-    }
-    
-    .task-icons {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    
-        svg {
-            width: 17px;
-            height: 17px;
-            &:hover{
-                cursor: pointer;
-            }
-        }
+
     }
 
+}
+
+.icon_delete {
+    padding-inline: 1.5rem;
+    padding-block: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+        color: $red;
+    }
+}
+
+.icon_update {
+    padding-inline: 1.5rem;
+    padding-block: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    p {
+        color: $sky;
+    }
 }
