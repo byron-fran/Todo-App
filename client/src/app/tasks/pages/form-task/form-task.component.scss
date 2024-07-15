@@ -12,16 +12,7 @@
     margin: 0;
 }
 
-.task-input{
-    
-    border: $gray 1px solid;
-    padding: 0.4rem;
 
-    &:focus{
-        outline: none;
-    }
-
-}
 .task-label{
     margin-block: 0.5rem;
 }
@@ -44,7 +35,7 @@
         width: 50%;
     }
     @include large_desktop {
-        width: 30%;
+        width: 40%;
     };
     
 }

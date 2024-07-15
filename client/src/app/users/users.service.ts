@@ -70,7 +70,6 @@ export class UsersService {
         }),
 
         catchError((error: HttpErrorResponse) => {
-          console.log(error.error)
           this._errorRegister.set(Object.values(error.error))
           return of(false)
 

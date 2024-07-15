@@ -1,6 +1,11 @@
 <div class="navbar-container">
-    <div class="searchbar">
-        <input type="text" placeholder="search task">
+    <div class="searchbar" >
+
+        <div style="width: 100%;">
+            <mat-form-field>
+                <input style="width: 100%;" matInput type="text" placeholder="search task">
+            </mat-form-field>
+        </div>
     </div>
     <ul>
         <li class="logout" (click)="onLogout()">

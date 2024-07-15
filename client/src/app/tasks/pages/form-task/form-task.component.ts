@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../../interfaces/Task';
+import { Task, TaskForm } from '../../interfaces/Task';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TasksService } from '../../tasks.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button'
+
+
 
 @Component({
   selector: 'app-form-task',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+      ReactiveFormsModule,
+      MatButtonModule,
+      MatInputModule,
+      MatFormFieldModule
+    ],
   templateUrl: './form-task.component.html',
   styleUrl: './form-task.component.scss'
 })
@@ -33,7 +43,7 @@ export class FormTaskComponent implements OnInit {
                 {
                   title: task?.title ,
                   description: task?.description,
-                  done: task?.done || null
+                  
                 }
               )
             }
@@ -51,7 +61,7 @@ export class FormTaskComponent implements OnInit {
 
     title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2000)]],
-    done: [false]
+  
 
   })
 
@@ -59,7 +69,7 @@ export class FormTaskComponent implements OnInit {
     
     if (this.form.invalid) return
 
-    const newTask: Task = {
+    const newTask: TaskForm = {
       title: this.form.value.title || '',
       description: this.form.value.description || '',
       id: this.id

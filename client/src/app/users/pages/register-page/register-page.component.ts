@@ -3,11 +3,12 @@ import { Component, computed, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UsersService } from '../../users.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button'
 import {MatIconModule} from '@angular/material/icon';
+
 @Component({
   selector: 'app-register-page',
   standalone: true,
@@ -52,7 +53,7 @@ export class RegisterPageComponent {
 
 
   public onSubmit() {
-    console.log(this.form.value)
+    
     if (this.form.invalid) {
       return
     }
@@ -61,8 +62,8 @@ export class RegisterPageComponent {
         next: () => {
           this._errorMessages.set(this.userServices.errorRegister())
         },
-        error: (error) => {
-          console.log(error)
+        error: (error : HttpErrorResponse) => {
+          console.log(error.error, 'desd el error')
         }
       })
 
