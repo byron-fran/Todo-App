@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Task, TaskForm } from './interfaces/Task';
 import { BehaviorSubject, Observable, catchError, map, of, tap, } from 'rxjs';
 
@@ -16,10 +16,17 @@ export class TasksService {
 
   private _tasks = new BehaviorSubject<Task[]>([]);
 
+  // get tasks
   public get tasks() {
     return this._tasks.asObservable()
+  };
+
+  // update list of tasks 
+  public updateTasks(tasks: Task[]) {
+    this._tasks.next(tasks)
   }
 
+  // create a new task
   public createTask(task: Partial<Task>): Observable<Task | undefined> {
 
     return this.http.post<Task>('/tasks/', task)
@@ -34,15 +41,20 @@ export class TasksService {
 
   };
 
-  public listTasks(): Observable<Task[]> {
-
-    return this.http.get<Task[]>('/tasks/')
+  // get list of tasks
+  public listTasks(key?: string): Observable<Task[]> {
+    let url = '/tasks/'
+    if (key) {
+      url += `?q=${key}`
+    }
+    return this.http.get<Task[]>(url)
       .pipe(
         map(tasks => tasks),
         catchError((error: HttpErrorResponse) => of([]))
       )
   };
 
+  // get one task  by id
   public getTaskById(id: string): Observable<Task | undefined> {
 
     return this.http.get<Task>(`/tasks/${id}/`)
@@ -52,6 +64,7 @@ export class TasksService {
       )
   }
 
+  // delete a task of id
   public deleteTaskById(id: string) {
 
     return this.http.delete(`/tasks/${id}/`)
@@ -64,6 +77,7 @@ export class TasksService {
 
   };
 
+  // Update a task by id
   public updateTaskById(id: string, task: TaskForm): Observable<Task | string> {
 
     return this.http.put<Task>(`/tasks/${id}/`, task)
@@ -76,6 +90,7 @@ export class TasksService {
       )
   }
 
+  // change status a favorite task
   public handleFavorite(id: string): Observable<string> {
 
     return this.http.put<string>(`/favorites/${id}/`, {})
@@ -97,6 +112,7 @@ export class TasksService {
       )
   };
 
+  // change status a done task
   public handleDone(id: string): Observable<string> {
 
     return this.http.put<string>(`/done/${id}/`, {})

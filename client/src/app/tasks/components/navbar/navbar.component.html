@@ -3,7 +3,13 @@
 
         <div style="width: 100%;">
             <mat-form-field>
-                <input style="width: 100%;" matInput type="text" placeholder="search task">
+                <input  
+                #q 
+                style="width: 100%;" 
+                matInput type="text" 
+                placeholder="search task"
+                (keyup)="onSearch(q.value)"
+                >
             </mat-form-field>
         </div>
     </div>
