@@ -1,4 +1,5 @@
 from django.forms import ValidationError
+from django.http import HttpRequest
 from django.shortcuts import render
 from .serealizers import TaskSerealizer
 from rest_framework import viewsets
@@ -12,14 +13,21 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import permission_classes,authentication_classes,api_view
 
 # Create your views here.
-class Tasks(APIView):
+class TasksView(APIView):
     
     permission_classes = [IsAuthenticated]
     authentication_classes = [ TokenAuthentication]
     
-    def get(self, request, format=None):
+    def get(self , request : HttpRequest, format=None):
         tasks = Task.objects.filter(user=request.user)
         serializer = TaskSerealizer(tasks, many=True)
+        
+        q = request.GET.get('q')
+        if q is not None:
+            tasks_filters = Task.objects.search_tasks(q)
+            serializer_filters = TaskSerealizer(tasks_filters, many=True)
+            return Response(serializer_filters.data, status=status.HTTP_200_OK)
+        
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request, format=None):
