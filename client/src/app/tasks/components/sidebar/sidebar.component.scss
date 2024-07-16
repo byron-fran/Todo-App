@@ -21,25 +21,27 @@ ul {
     }
 
     li {
-
+        box-sizing: border-box;
         width: 100%;
         display: block;
         margin-block: 0.5rem;
+        padding: 10px;
 
         &:hover {
             cursor: pointer;
         }
 
-        &:first-child {
-            margin-top: 0;
+        @include tablet {
+            &:first-child {
+                margin-top: 0;
+            }
         }
 
     }
 
     .active {
-        box-sizing: border-box;
+
         background: $sky;
-        padding: 10px;
         color: white;
 
     }

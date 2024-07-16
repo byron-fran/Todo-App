@@ -8,7 +8,8 @@ import { UsersService } from '../../users.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button'
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { LoadingComponent } from '../../../components/loading/loading.component';
 @Component({
   selector: 'auth-login-page',
   standalone: true,
@@ -20,20 +21,32 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    LoadingComponent
   ],
   templateUrl: './login-page.component.html',
 
 })
 export class LoginPageComponent implements OnInit {
 
-  ngOnInit(): void { }
+  public isLoading?: boolean
+
+  ngOnInit(): void {
+    this.userServices.authStatus$.subscribe(res => {
+      if (res === 'checking') {
+        this.isLoading = true
+      }
+      else {
+        this.isLoading = false
+      }
+    })
+  }
 
   constructor(
     private fb: FormBuilder,
     private userServices: UsersService,
     private router: Router
-  ) {};
+  ) { };
 
   public hide = signal(true);
 

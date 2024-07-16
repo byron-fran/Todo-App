@@ -10,19 +10,19 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UsersService {
-  
+
   constructor(private http: HttpClient) {
 
     const token = localStorage.getItem('token')
     if (token) {
       this.checkAuth().subscribe()
     }
-    
+
   };
 
   private router = inject(Router);
-  
-  private _authStatus = new BehaviorSubject<AuthStatus>(AuthStatus.checking);
+
+  private _authStatus = new BehaviorSubject<AuthStatus>(AuthStatus.notAuthenticated);
   public authStatus$ = this._authStatus.asObservable()
 
   private _currentUser = signal<User | null>(null)
@@ -45,7 +45,7 @@ export class UsersService {
   };
 
   public checkAuth(): Observable<boolean> {
-
+    this._authStatus.next(AuthStatus.checking)
     return this.http.get<AuthResponse>('/profile/')
       .pipe(
         map(({ token, user }) => this.setAuthentication(user, token)
@@ -53,6 +53,7 @@ export class UsersService {
         catchError((error: HttpErrorResponse) => {
 
           this._authStatus.next(AuthStatus.notAuthenticated);
+         
           return of(false);
         })
       );

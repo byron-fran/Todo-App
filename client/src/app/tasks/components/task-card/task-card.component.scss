@@ -11,6 +11,10 @@ a {
     padding: 0;
 }
 
+.task-done {
+    text-decoration: line-through;
+}
+
 .task-card {
     background: lighten($color: $gray, $amount: 8);
     padding: 1rem;
@@ -32,10 +36,12 @@ a {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+
         .icons_options {
             display: flex;
             align-items: center;
         }
+
         .mat-mdc-menu-item {
             padding: 0;
         }
@@ -67,6 +73,7 @@ a {
     display: flex;
     align-items: center;
     gap: 10px;
+
     p {
         color: $sky;
     }

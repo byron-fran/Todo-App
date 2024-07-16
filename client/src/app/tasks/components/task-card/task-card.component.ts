@@ -6,11 +6,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'task-card',
   standalone: true,
-  imports: [RouterModule, MatCheckboxModule, MatMenuModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    RouterModule, 
+    MatCheckboxModule, 
+    MatMenuModule, 
+    MatButtonModule, 
+    MatIconModule],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.scss'
 })

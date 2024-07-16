@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Route, Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { UsersService } from '../../../users/users.service';
 
@@ -12,8 +12,15 @@ import { UsersService } from '../../../users/users.service';
   styleUrl: './task-main-layout.component.scss'
 
 })
-export class TaskMainLayoutComponent {
+export class TaskMainLayoutComponent implements OnInit {
   
-  constructor(private userServices: UsersService) { }
+  constructor(private userServices: UsersService, private route : Router) { }
+  ngOnInit(): void {
+    this.userServices.authStatus$.subscribe( status => {
+        if(status === 'notAuthenticated'){
+          this.route.navigateByUrl('auth/login')
+        }
+    })
+  }
 
 }

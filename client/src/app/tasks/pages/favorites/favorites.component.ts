@@ -21,7 +21,6 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.favoritesSubscription = this.taskServies.tasks.subscribe(tasks => {
       this.favorites = tasks.filter(task => task.is_favorite)
-      console.log(this.favorites)
     })
   };
 

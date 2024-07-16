@@ -1,27 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
-@import  './scss/colors';
+@import './scss/colors';
 @import './scss/mixins';
 
 ::before,
 ::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  border-width: 0;
+    border-width: 0;
 
-  border-style: solid;
+    border-style: solid;
 
-  border-color: #E5E7EB;
+    border-color: #E5E7EB;
 
 }
 
 * {
     box-sizing: border-box;
     border-width: 0;
-      margin: 0;   
+    margin: 0;
 }
+
 body {
-  box-sizing: border-box;
-  border-width: 0;
+    box-sizing: border-box;
+    border-width: 0;
     margin: 0;
 }
 
@@ -32,42 +33,51 @@ li {
 }
 
 button {
-    border:  none;
+    border: none;
     background: transparent;
     cursor: pointer;
 }
+
 ::before,
 ::after {
-  --tw-content: '';
+    --tw-content: '';
 }
 
 input {
     width: 100%;
 }
+
 body {
-    
+
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
 }
+
 a {
     text-decoration: none;
     color: black;
 
 }
-h1, h2, h3, p {
+
+h1,
+h2,
+h3,
+p {
     margin: 0;
 }
+
 .auth-container {
     height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin:0 auto;
+    margin: 0 auto;
     border-radius: 10px;
 
-    
+
 }
+
 .auth-form {
     padding: 2rem;
     border-color: $gray;
@@ -81,37 +91,44 @@ h1, h2, h3, p {
     @include tablet {
         width: 40%;
     }
+
     @include desktop {
         width: 50%;
     }
+
     @include large_desktop {
         width: 30%;
     }
 }
 
-.auth-links{
+.auth-links {
     display: flex;
     gap: 2rem;
+
     a {
         color: $sky;
-        
+
     }
+
     margin-top: 15px;
-    
+
 }
+
 .auth-error {
     text-align: center;
     color: $red;
     margin: 5px auto;
 }
-.btn-submit{
+
+.btn-submit {
     border: none;
-    margin-top:1rem;
+    margin-top: 1rem;
     padding: 10px;
     border-radius: 5px;
     background: $sky;
     color: #fff;
     width: 100%;
+
     &:hover {
         background: darken($color: $sky, $amount: 5);
         cursor: pointer;
@@ -129,10 +146,22 @@ h1, h2, h3, p {
         width: 95%;
 
     }
-
- 
-
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.loading_container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
